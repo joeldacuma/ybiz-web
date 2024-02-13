@@ -1,6 +1,14 @@
 import Head from "next/head";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-export default function Home() {
+
+const Main = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/home");
+  });
 
   return (
     <>
@@ -16,3 +24,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Main;
