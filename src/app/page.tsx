@@ -1,9 +1,10 @@
-"use client";
-
-import { useQuery, useIsFetching, HydrationBoundary, dehydrate, QueryClient } from "@tanstack/react-query";
+import React, { use, useEffect } from "react";
+import { HydrationBoundary, dehydrate, QueryClient } from "@tanstack/react-query";
 import { getHeaders } from "@/providers/index";
 
-export default async function Home() {
+import Home from "@/app/home/page";
+
+export default async function App({children}: any) {
   const queryClient = new QueryClient();
   
   await queryClient.prefetchQuery({
@@ -11,11 +12,9 @@ export default async function Home() {
     queryFn: () => getHeaders(),
   });
 
-
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      </main>
+      <Home />
     </HydrationBoundary>
   );
 }
