@@ -4,7 +4,7 @@ import "./globals.css";
 
 
 export const metadata: Metadata = {
-  title: "YBIZ",
+  title: "YBIZ - Curated Community for Entrepreneurs",
   description: "YBIZ community is a business curated marketplace for startups and aspiring entrepreneurs",
 };
 
