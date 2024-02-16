@@ -29,3 +29,43 @@ export const getFeatures = async () => {
     return { error: error };
   }
 };
+
+export const getPrograms = async () => {
+  try {
+    const response = await AxiosInstanceProvider.get("/home-programs-section?populate=deep&_limit=-1");
+    return { programs: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  }
+};
+
+export const getGalleries = async () => {
+  try {
+    const response = await AxiosInstanceProvider.get("/home-gallery-section?populate=deep&_limit=-1");
+    return { galleries: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  } 
+};
+
+export const getFooter = async () => {
+  try {
+    const response = await AxiosInstanceProvider.get("/footer?populate=deep&_limit=-1");
+    return { footers: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  }
+};
+
+export const getTestimonials = async () => {
+  try {
+    const response = await AxiosInstanceProvider.get("/home-testimonials-section?populate=deep&_limit=-1");
+    return { testimonials: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  }
+};
