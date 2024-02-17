@@ -1,6 +1,6 @@
-"use client"
+"use client" 
 
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import Container  from "@/components/Container";
 import HeroBanner from "@/app/home/hero";
 import HomeFeatures from "@/app/home/feature";
