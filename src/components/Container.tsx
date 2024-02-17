@@ -8,15 +8,17 @@ import { getHeaders, getFooter } from "@/providers"
 
 
 export default function Container({ children }: any) {
-  const {data: headers, isPending} = useQuery({
+  const {data: headers, isPending: isPendingHeaders} = useQuery({
     queryKey: ["headers"],
+    queryFn: () => getHeaders(),
   });
 
-  const {data: footers} = useQuery({
+  const {data: footers, isPending: isPendingFooters} = useQuery({
     queryKey: ["footers"],
+    queryFn: () => getFooter(),
   });
   
-  if (isPending) {
+  if (isPendingHeaders || isPendingFooters) {
     return <div>Loading...</div>;
   }
 
