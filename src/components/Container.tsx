@@ -10,12 +10,10 @@ import { getHeaders, getFooter } from "@/providers"
 export default function Container({ children }: any) {
   const {data: headers, isPending} = useQuery({
     queryKey: ["headers"],
-    queryFn: () => getHeaders(),
   });
 
   const {data: footers} = useQuery({
     queryKey: ["footers"],
-    queryFn: () => getFooter(),
   });
   
   if (isPending) {
