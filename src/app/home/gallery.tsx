@@ -5,8 +5,8 @@ const HomeGallery = ({ data }: any) => {
 
   return (
     <div className="bg-black">
-      <div className="container lg:px-24 md:px-24 px-12 py-24 mx-auto flex flex-wrap">
-        <div className="flex w-full mb-20 flex-wrap">
+      <div className="container lg:p-24 md:p-24 py-12 flex flex-wrap">
+        <div className="flex w-full mb-16 flex-wrap">
           <h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900 lg:w-1/3 lg:mb-0 mb-4 text-white">
             {galleries.data.title}
           </h1>

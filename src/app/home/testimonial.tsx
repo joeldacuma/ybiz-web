@@ -22,7 +22,7 @@ const HomeTestimonial = ({ data }: any) => {
             {testimonials.data.description}
           </p>
         </div>
-        <div className="w-full px-24">
+        <div>
           <Carousel className="w-full">
             <CarouselContent className="p-3">
               {testimonials.data.members.map((item: any) => (
