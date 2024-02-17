@@ -10,32 +10,45 @@ import HomeContact from "@/app/home/contact";
 import HomeTestimonial from "./testimonial";
 import HomeInformation from "./information";
 
+import { getBanners,
+         getFeatures,
+         getPrograms,
+         getGalleries,
+         getTestimonials,
+         getAbout } from "@/providers"
+
 import { useQuery } from "@tanstack/react-query";
 
 
 const Home = () => {
   const {data: banners, isPending: isPendingBanners} = useQuery({
-    queryKey: ["banners"]
+    queryKey: ["banners"],
+    queryFn: () => getBanners()
   });
 
   const {data: features, isPending: isPendingFeatures} = useQuery({
-    queryKey: ["features"]
+    queryKey: ["features"],
+    queryFn: () => getFeatures()
   });
 
   const {data: programs, isPending: isPendingPrograms} = useQuery({
-    queryKey: ["programs"]
+    queryKey: ["programs"],
+    queryFn: () => getPrograms()
   });
 
   const {data: galleries, isPending: isPendingGalleries} = useQuery({
-    queryKey: ["galleries"]
+    queryKey: ["galleries"],
+    queryFn: () => getGalleries()
   });
 
   const {data: testimonials, isPending: isPendingTestimonials} = useQuery({
-    queryKey: ["testimonials"]
+    queryKey: ["testimonials"],
+    queryFn: () => getTestimonials()
   });
 
   const {data: informations, isPending: isPendingInformations} = useQuery({
-    queryKey: ["informations"]
+    queryKey: ["informations"],
+    queryFn: () => getAbout()
   });
 
   if (isPendingBanners || 
@@ -51,7 +64,7 @@ const Home = () => {
    <>
    <Suspense fallback={<div>Loading...</div>} />
      <Container>
-      {/* <div>
+      <div>
         <HeroBanner data={banners} />
       </div>
       <div className="flex text-center justify-center">
@@ -68,7 +81,7 @@ const Home = () => {
       </div>
       <div>
         <HomeTestimonial data={testimonials} />
-      </div> */}
+      </div>
      </Container>
    </>
   );
