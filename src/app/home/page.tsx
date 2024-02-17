@@ -51,7 +51,7 @@ const Home = () => {
    <>
    <Suspense fallback={<div>Loading...</div>} />
      <Container>
-      <div>
+      {/* <div>
         <HeroBanner data={banners} />
       </div>
       <div className="flex text-center justify-center">
@@ -68,7 +68,7 @@ const Home = () => {
       </div>
       <div>
         <HomeTestimonial data={testimonials} />
-      </div>
+      </div> */}
      </Container>
    </>
   );
