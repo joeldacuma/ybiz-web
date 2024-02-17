@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import { Suspense, useState } from "react";
 import Container  from "@/components/Container";
 import HeroBanner from "@/app/home/hero";
 import HomeFeatures from "@/app/home/feature";
@@ -14,32 +14,42 @@ import { useQuery } from "@tanstack/react-query";
 
 
 const Home = () => {
-  const {data: banners} = useQuery({
+  const {data: banners, isPending: isPendingBanners} = useQuery({
     queryKey: ["banners"]
   });
 
-  const {data: features} = useQuery({
+  const {data: features, isPending: isPendingFeatures} = useQuery({
     queryKey: ["features"]
   });
 
-  const {data: programs} = useQuery({
+  const {data: programs, isPending: isPendingPrograms} = useQuery({
     queryKey: ["programs"]
   });
 
-  const {data: galleries} = useQuery({
+  const {data: galleries, isPending: isPendingGalleries} = useQuery({
     queryKey: ["galleries"]
   });
 
-  const {data: testimonials} = useQuery({
+  const {data: testimonials, isPending: isPendingTestimonials} = useQuery({
     queryKey: ["testimonials"]
   });
 
-  const {data: informations} = useQuery({
+  const {data: informations, isPending: isPendingInformations} = useQuery({
     queryKey: ["informations"]
   });
+
+  if (isPendingBanners || 
+      isPendingFeatures || 
+      isPendingPrograms || 
+      isPendingGalleries || 
+      isPendingTestimonials || 
+      isPendingInformations) {
+    return <div>Loading...</div>;
+  }
   
   return (
    <>
+   <Suspense fallback={<div>Loading...</div>} />
      <Container>
       <div>
         <HeroBanner data={banners} />

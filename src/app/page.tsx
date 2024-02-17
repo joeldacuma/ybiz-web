@@ -1,4 +1,4 @@
-import React, { use, useEffect } from "react";
+import React from "react";
 import { HydrationBoundary, dehydrate, QueryClient } from "@tanstack/react-query";
 import { getHeaders, 
          getBanners, 

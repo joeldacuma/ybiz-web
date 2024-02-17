@@ -1,20 +1,27 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useQuery } from "@tanstack/react-query";
+import { getHeaders, getFooter } from "@/providers"
 
 
 export default function Container({ children }: any) {
-  const {data: headers} = useQuery({
+  const {data: headers, isPending} = useQuery({
     queryKey: ["headers"],
+    queryFn: () => getHeaders(),
   });
 
   const {data: footers} = useQuery({
     queryKey: ["footers"],
+    queryFn: () => getFooter(),
   });
   
+  if (isPending) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="w-full overflow-hidden bg-gradient-to-t from-zinc-50 to-gray-50">
