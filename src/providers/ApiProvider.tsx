@@ -69,3 +69,13 @@ export const getTestimonials = async () => {
     return { error: error };
   }
 };
+
+export const getAbout = async () => {
+  try {
+    const response = await AxiosInstanceProvider.get("/home-about-section?populate=deep&_limit=-1");
+    return { informations: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  }
+};

@@ -33,7 +33,7 @@ export default function Navbar({ data }: any) {
                 </NavigationMenuItem>
                 )
               )}
-              <NavigationMenuItem>
+              {/* <NavigationMenuItem>
                 <Link href="/login" legacyBehavior passHref>
                   <NavigationMenuLink
                   className="bg-black 
@@ -42,7 +42,7 @@ export default function Navbar({ data }: any) {
                     Login
                   </NavigationMenuLink>
                 </Link>
-               </NavigationMenuItem>
+               </NavigationMenuItem> */}
             </NavigationMenuList>
           </NavigationMenu>
       </ul>

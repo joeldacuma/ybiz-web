@@ -6,7 +6,8 @@ import { getHeaders,
          getPrograms,
          getGalleries,
          getTestimonials,
-         getFooter } from "@/providers/index";
+         getFooter,
+         getAbout } from "@/providers/index";
 
 import Home from "@/app/home/page";
 
@@ -46,6 +47,11 @@ export default async function App({children}: any) {
   await queryClient.prefetchQuery({
     queryKey: ["footers"],
     queryFn: () => getFooter(),
+  });
+
+  await queryClient.prefetchQuery({
+    queryKey: ["informations"],
+    queryFn: () => getAbout(),
   });
 
   return (

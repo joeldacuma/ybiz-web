@@ -6,7 +6,7 @@ const HomePrograms = ({data}: any) => {
   const [programs] = useState(data.programs || null);  
 
   return (
-  <div className="container px-12 py-24 mx-auto">
+  <div className="container bg-white px-12 py-24 mx-auto">
     <div className="flex flex-wrap w-full mb-20 flex-col items-center text-center">
       <Badge variant="secondary" className="mb-4 py-2 px-8 border-black">{programs.data.badgeTitle}</Badge>
       <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">{programs.data.programTitle}</h1>

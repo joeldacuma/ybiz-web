@@ -8,6 +8,7 @@ import HomePrograms from "@/app/home/programs";
 import HomeGallery from "@/app/home/gallery";
 import HomeContact from "@/app/home/contact";
 import HomeTestimonial from "./testimonial";
+import HomeInformation from "./information";
 
 import { useQuery } from "@tanstack/react-query";
 
@@ -32,6 +33,10 @@ const Home = () => {
   const {data: testimonials} = useQuery({
     queryKey: ["testimonials"]
   });
+
+  const {data: informations} = useQuery({
+    queryKey: ["informations"]
+  });
   
   return (
    <>
@@ -43,16 +48,16 @@ const Home = () => {
         <HomeFeatures data={features} />
       </div>
       <div>
-       <HomePrograms data={programs} />
+        <HomeInformation data={informations} />
       </div>
       <div>
-        <HomeTestimonial data={testimonials} />
+       <HomePrograms data={programs} />
       </div>
       <div className="bg-white">
         <HomeGallery data={galleries} />
       </div>
       <div>
-        <HomeContact />
+        <HomeTestimonial data={testimonials} />
       </div>
      </Container>
    </>
