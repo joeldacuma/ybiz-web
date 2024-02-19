@@ -18,7 +18,7 @@ const HomePrograms = ({data}: any) => {
       {
         programs.data.cards.map((item: any) => (
           <div  key={item.id} className="xl:w-1/2 md:w-1/2 p-4">
-            <Card className="border border-gray-200 p-12 rounded-lg shadow-xl">
+            <Card className="border border-gray-200 p-8 rounded-lg shadow-xl">
             <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-black text-indigo-500 mb-4">
               <img className="w-6 h-6" src={item.iconLogo.url} />
             </div>

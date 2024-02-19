@@ -64,7 +64,7 @@ const Home = () => {
    <>
    <Suspense fallback={<div>Loading...</div>} />
      <Container>
-      <div>
+      <div id="home">
         <HeroBanner data={banners} />
       </div>
       <div className="flex text-center justify-center">
@@ -73,13 +73,13 @@ const Home = () => {
       <div>
         <HomeInformation data={informations} />
       </div>
-      <div>
+      <div id="about">
        <HomePrograms data={programs} />
       </div>
-      <div className="bg-white">
+      <div id="events" className="bg-white">
         <HomeGallery data={galleries} />
       </div>
-      <div>
+      <div id="testimonies">
         <HomeTestimonial data={testimonials} />
       </div>
      </Container>

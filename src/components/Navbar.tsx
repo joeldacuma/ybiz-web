@@ -25,7 +25,7 @@ export default function Navbar({ data }: any) {
           <NavigationMenuList className="flex-wrap gap-1">
             {headers.data.menu.map((item: any) => (
               <NavigationMenuItem key={item.id}>
-                <Link href={item.url} legacyBehavior passHref>
+                <Link href={"#"+item.url} legacyBehavior passHref>
                   <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                     {item.title}
                   </NavigationMenuLink>
