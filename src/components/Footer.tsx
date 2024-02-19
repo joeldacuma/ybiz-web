@@ -19,7 +19,7 @@ const Footer = ({data}: any) => {
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
           {
             footers.data.socialLinks.map((item: any) => (
-              <a key={item.id} className="text-gray-500 hover:cursor-pointer">
+              <a key={item.id} href={item.url} className="text-gray-500 hover:cursor-pointer">
                 <img className="w-7 h-7" src={item.icon[0].url} />
               </a>
             ))
