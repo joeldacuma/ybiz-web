@@ -9,6 +9,7 @@ import HomeGallery from "@/app/home/gallery";
 import HomeContact from "@/app/home/contact";
 import HomeTestimonial from "./testimonial";
 import HomeInformation from "./information";
+import { Loader } from "@/components/Loader";
 
 import { getBanners,
          getFeatures,
@@ -57,12 +58,14 @@ const Home = () => {
       isPendingGalleries || 
       isPendingTestimonials || 
       isPendingInformations) {
-    return <div>Loading...</div>;
+    return <Loader />
   }
   
   return (
    <>
-   <Suspense fallback={<div>Loading...</div>} />
+   <Suspense fallback={
+    <Loader />
+   } />
      <Container>
       <div id="home">
         <HeroBanner data={banners} />

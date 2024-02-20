@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { useQuery } from "@tanstack/react-query";
-import { getHeaders, getFooter } from "@/providers"
+import { getHeaders, getFooter } from "@/providers";
+import { Loader } from "@/components/Loader";
 
 
 export default function Container({ children }: any) {
@@ -19,7 +20,7 @@ export default function Container({ children }: any) {
   });
   
   if (isPendingHeaders || isPendingFooters) {
-    return <div>Loading...</div>;
+    return <Loader />
   }
 
   return (
