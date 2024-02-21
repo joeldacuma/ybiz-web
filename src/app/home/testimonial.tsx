@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   Carousel,
   CarouselItem,
@@ -6,15 +6,18 @@ import {
   CarouselPrevious,
   CarouselNext,
 } from "@/components/ui/carousel";
+import { IntersectObserver } from "@/components/IntersectObserver";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const HomeTestimonial = ({ data }: any) => {
+  const testimonialRef = useRef(null);
+  const testimonialIntersectObserver = IntersectObserver(testimonialRef);
   const [testimonials] = useState(data.testimonials || null);
 
   return (
     <div className="w-full bg-white py-12 space-y-6 md:py-24 lg:py-32">
       <div className="container space-y-6">
-        <div className="space-y-2 text-center">
+        <div ref={testimonialRef} className={`space-y-2 text-center ${testimonialIntersectObserver ? "animate-fade-down animate-ease-in" : "invisible"}`}>
           <h1 className="text-3xl font-medium tracking-tighter sm:text-4xl md:text-4xl">
             {testimonials.data.title}
           </h1>
@@ -27,7 +30,7 @@ const HomeTestimonial = ({ data }: any) => {
             <CarouselContent className="p-3">
               {testimonials.data.members.map((item: any) => (
                 <CarouselItem key={item.id} className="pl-1 md:basis-1/2 lg:basis-1/2">
-                  <div className="h-full bg-gray-100 p-8 rounded">
+                  <div ref={testimonialRef} className={`h-full bg-gray-100 p-8 rounded ${testimonialIntersectObserver ? "animate-fade-down animate-ease-in" : "invisible"}`}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"

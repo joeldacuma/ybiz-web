@@ -6,7 +6,6 @@ import HeroBanner from "@/app/home/hero";
 import HomeFeatures from "@/app/home/feature";
 import HomePrograms from "@/app/home/programs";
 import HomeGallery from "@/app/home/gallery";
-import HomeContact from "@/app/home/contact";
 import HomeTestimonial from "./testimonial";
 import HomeInformation from "./information";
 import { Loader } from "@/components/Loader";
