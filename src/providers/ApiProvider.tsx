@@ -81,3 +81,13 @@ export const getAbout = async () => {
     return { error: error };
   }
 };
+
+export const getLoginContent = async () => {
+  try {
+    const response = await AxiosInstanceProvider.get("/login?populate=deep&_limit=-1");
+    return { loginContent: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  }
+};

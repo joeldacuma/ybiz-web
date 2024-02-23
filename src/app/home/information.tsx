@@ -6,8 +6,6 @@ const HomeInformation = ({data} : any) => {
   const informationIntersect = IntersectObserver(informationRef);
   const [informations] = useState(data.informations || null);
 
-  console.log(IntersectObserver(informationRef));
-
   return (
   <div className="container bg-gray-100 px-5 py-24 mx-auto">
     <div ref={informationRef} className={`text-center mb-20 ${informationIntersect ? "visible animate-fade-up animate-once animate-ease-in" : "invisible"}`}>

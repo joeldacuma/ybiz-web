@@ -13,6 +13,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html className="scroll-smooth" lang="en">
       <body>
