@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ROUTE_LOGIN } from "@/constants";
 import { useRouter } from "next/navigation";
 
 const HeroBanner = ({data}: any) => {
@@ -13,7 +12,7 @@ const HeroBanner = ({data}: any) => {
       <h1 className="animate-fade-up title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">{banners.data.bannerTitle}</h1>
       <p className="animate-fade-up mb-8 leading-relaxed text-gray-500">{banners.data.bannerDescription}</p>
       <div className="flex animate-fade animate-ease-in w-full md:justify-start justify-center items-end">
-        <Button className="inline-flex text-white bg-black rounded-md border-0 py-2 px-6 focus:ring-2 text-lg" onClick={() => router.push(ROUTE_LOGIN)}>
+        <Button className="inline-flex text-white bg-black rounded-md border-0 py-2 px-6 focus:ring-2 text-lg" onClick={() => router.push(banners.data.bannerButtonUrl)}>
           {banners.data.bannerButtonText}
         </Button>
       </div>
