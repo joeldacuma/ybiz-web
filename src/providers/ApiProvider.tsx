@@ -1,5 +1,3 @@
-"use client"
-
 import { AxiosInstanceProvider } from "@/providers/index";
 
 export const getHeaders = async () => {
