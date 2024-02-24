@@ -8,10 +8,11 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { getLoginContent } from "@/providers";
 import { Loader } from "@/components/Loader";
-import { ROUTE_HOME } from "@/constants";
+import { ROUTE_DASHBOARD } from "@/constants";
 import { EyeOpenIcon, EyeClosedIcon } from "@radix-ui/react-icons";
 
 import { useQuery } from "@tanstack/react-query";
+import { signInWithGoogle } from "@/providers";
 
 const Login = () => {
   const router = useRouter();
@@ -32,6 +33,16 @@ const Login = () => {
 
     setIsShowPassword(false);
     setIsShowPasswordType("password");
+  };
+
+  const handleGoogleSignIn = async () => {
+    const success = await signInWithGoogle();
+    
+    console.log(success);
+
+    if (success) {
+      router.push(ROUTE_DASHBOARD);
+    }
   };
 
   if (isPendingLoginContent) {
@@ -104,6 +115,7 @@ const Login = () => {
         <div className="flex mt-4 gap-x-2">
           <Button
             className="flex items-center justify-center w-full p-2 border border-gray-600 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-gray-300"
+          onClick={handleGoogleSignIn}
           >
             <img className="w-6 h-6" src={loginContentData.data.googleIconButton.url} />
             <span className="p-1">Google</span>
