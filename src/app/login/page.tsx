@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import { getLoginContent } from "@/providers";
 import { Loader } from "@/components/Loader";
-import { ROUTE_DASHBOARD } from "@/constants";
+import { ROUTE_DASHBOARD, ROUTE_HOME } from "@/constants";
 import { EyeOpenIcon, EyeClosedIcon } from "@radix-ui/react-icons";
 
 import { useQuery } from "@tanstack/react-query";
@@ -57,7 +57,7 @@ const Login = () => {
           src={loginContentData.data.companyLogo.url}
           width={100}
           height={100}
-          alt="company logo"
+          alt="YBIZ logo"
           onClick={() => router.push(ROUTE_HOME)}
         />
       </div>
