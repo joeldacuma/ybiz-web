@@ -6,7 +6,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/components/ui/use-toast";
 import { useSignUp } from "@clerk/nextjs";
 
-import { ERROR_SIGNUP_PASSWORD_DONT_MATCH, 
+import { ERROR_SIGNUP_PASSWORD_DONT_MATCH,
+         VERIFICATION_CODE_PENDING, 
+         RESEND_VERIFICATION_CODE_TEXT,
+         RESEND_VERIFICATION_CODE,
          EMAIL_CODE,
          COMPLETE,
          ROUTE_DASHBOARD } from "@/constants";
@@ -21,16 +24,18 @@ const Signup = ({ data, handleOnSignup }: any) => {
     error: false,
     message: "",
   });
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState('');
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
     lastName: "",
     password: "",
+    isNotified: false,
     confirmPassword: "",
   });
 
   const handleSubmit = async (e: any) => {
+    setCode('');
     e.preventDefault();
     if (!isLoaded) {
       return;
@@ -80,12 +85,22 @@ const Signup = ({ data, handleOnSignup }: any) => {
         router.push(ROUTE_DASHBOARD);
       }
     } catch(err: any) {
-
+      setErrorMessage({ error: true, message: err.errors[0].message });
     }
   };
 
+  const onChangeSubmit = (value: any) => {
+    setErrorMessage({ error: false, message: "" });
+    setFormData({ ...formData, ...value});
+  };
+
+  const onChangeCode = (value: string) => {
+    setErrorMessage({ error: false, message: "" });
+    setCode(value);
+  }
+
   return (
-    <Card className="animate-fade-up w-full md:px-24 px-12 py-12 bg-white rounded-2xl shadow-2xl lg:max-w-xl">
+    <Card className="animate-fade-up w-full m-4 md:px-24 px-12 py-12 bg-white rounded-2xl shadow-2xl lg:max-w-xl">
       {!pendingVerification ? (
         <div>
           <div className="text-2xl pb-2 font-medium text-center text-gray-700">
@@ -105,7 +120,7 @@ const Signup = ({ data, handleOnSignup }: any) => {
               </label>
               <Input
                 onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
+                  onChangeSubmit({ ...formData, email: e.target.value })
                 }
                 type="email"
                 placeholder="Email..."
@@ -122,7 +137,7 @@ const Signup = ({ data, handleOnSignup }: any) => {
               </label>
               <Input
                 onChange={(e) =>
-                  setFormData({ ...formData, firstName: e.target.value })
+                  onChangeSubmit({ ...formData, firstName: e.target.value })
                 }
                 type="text"
                 placeholder="First name..."
@@ -139,7 +154,7 @@ const Signup = ({ data, handleOnSignup }: any) => {
               </label>
               <Input
                 onChange={(e) =>
-                  setFormData({ ...formData, lastName: e.target.value })
+                  onChangeSubmit({ ...formData, lastName: e.target.value })
                 }
                 type="text"
                 placeholder="Last name..."
@@ -157,7 +172,7 @@ const Signup = ({ data, handleOnSignup }: any) => {
               <div className="relative h-10 w-full">
                 <Input
                   onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
+                    onChangeSubmit({ ...formData, password: e.target.value })
                   }
                   type="password"
                   placeholder="Enter password..."
@@ -176,7 +191,7 @@ const Signup = ({ data, handleOnSignup }: any) => {
               <div className="relative h-10 w-full">
                 <Input
                   onChange={(e) =>
-                    setFormData({
+                    onChangeSubmit({
                       ...formData,
                       confirmPassword: e.target.value,
                     })
@@ -194,7 +209,7 @@ const Signup = ({ data, handleOnSignup }: any) => {
               </span>
             </div>
             <div className="mb-6">
-              <Checkbox id="terms" />
+              <Checkbox onCheckedChange={(e) => onChangeSubmit({...formData, isNotified: e})} id="terms" />
               <label
                 htmlFor="terms"
                 className="text-sm font-sm text-gray-300 ml-2 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -207,7 +222,7 @@ const Signup = ({ data, handleOnSignup }: any) => {
               <Button
                 type="submit"
                 className="flex items-center justify-center w-full border border-gray-600 
-          rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-gray-300"
+                rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-gray-300"
               >
                 REGISTER
               </Button>
@@ -217,7 +232,7 @@ const Signup = ({ data, handleOnSignup }: any) => {
       ) : (
         <div>
           <div className="text-2xl pb-2 font-medium text-center text-gray-700">
-            Verification code
+            Verify your Email
           </div>
           <div className="text-sm text-center text-gray-400">
             We have sent a verification code to your email. Please enter the
@@ -233,21 +248,41 @@ const Signup = ({ data, handleOnSignup }: any) => {
               </label>
               <Input
                 onChange={(e) =>
-                  setCode(e.target.value)
+                  onChangeCode(e.target.value)
                 }
-                type="text"
+                maxLength={6}
                 placeholder="Enter code..."
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md 
               focus:border-gray-300 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
             </div>
+            <div className="mb-4">
+              {errorMessage.error ?
+                <span className="text-sm text-red-400">
+                  {errorMessage.message}
+                </span> :
+                <div>
+                  <p className="text-sm text-gray-800">
+                    {VERIFICATION_CODE_PENDING}
+                  </p>
+                  <p className="text-sm text-gray-800">
+                    {RESEND_VERIFICATION_CODE_TEXT}
+                    <span onClick={handleSubmit} 
+                    className="text-sm text-blue-600 m-1 hover:underline hover:cursor-pointer">
+                      {RESEND_VERIFICATION_CODE}
+                    </span> 
+                  </p>
+                </div>
+              }
+            </div>
             <div className="mb-6">
               <Button
+                disabled={!code}
                 type="submit"
                 className="flex items-center justify-center w-full border border-gray-600 
                 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-gray-300"
               >
-                Verify Email
+                SUBMIT
               </Button>
             </div>
           </form>

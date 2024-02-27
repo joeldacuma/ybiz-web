@@ -10,7 +10,7 @@ export default authMiddleware({
     if (auth.userId && !auth.isPublicRoute) {
       return NextResponse.next();
     }
-
+ 
     return NextResponse.next();
   },
   publicRoutes: [

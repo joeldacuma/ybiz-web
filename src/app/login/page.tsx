@@ -37,7 +37,6 @@ const Login = () => {
     router.push(ROUTE_HOME);
   };
 
-
   return (
     <>
     <div className="m-5 flex flex-row text-center items-center hover:underline cursor-pointer">
@@ -46,7 +45,7 @@ const Login = () => {
       </div>
       <h4 className="text-black-600 font-bold" onClick={handleBack}>HOME</h4>
     </div>
-    <div 
+    <div
       className="relative flex flex-col items-center justify-center min-h-screen 
       overflow-hidden bg-gradient-to-t from-slate-300 to-stone-80">
       <div>
