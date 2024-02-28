@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import { getLoginContent } from "@/providers";
@@ -13,11 +13,11 @@ import { useQuery } from "@tanstack/react-query";
 
 const Login = () => {
   const router = useRouter();
-  const {data: loginContent, isPending: isPendingLoginContent} = useQuery({
+  const { data: loginContent, isPending: isPendingLoginContent } = useQuery({
     queryKey: ["loginContent"],
-    queryFn: () => getLoginContent()
+    queryFn: () => getLoginContent(),
   });
-  const loginContentData:any = loginContent?.loginContent || null; 
+  const loginContentData: any = loginContent?.loginContent || null;
   const [isShowSignup, setIsShowSignup] = useState(false);
 
   if (isPendingLoginContent) {
@@ -38,32 +38,33 @@ const Login = () => {
   };
 
   return (
-    <>
-    <div className="m-5 flex flex-row text-center items-center hover:underline cursor-pointer">
-      <div>
-        <CaretLeftIcon height={30} width={30} />
+    <div className="w-full overflow-auto scrollbar-hide bg-gradient-to-t from-slate-300 to-stone-80">
+      {/* <div className="p-5 flex flex-row text-center items-center hover:underline cursor-pointer">
+        <div>
+          <CaretLeftIcon height={30} width={30} />
+        </div>
+        <h4 className="text-black-600 font-bold" onClick={handleBack}>
+          HOME
+        </h4>
+      </div> */}
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <div>
+          <img
+            className="p-4 cursor-pointer"
+            src={loginContentData.data.companyLogo.url}
+            width={100}
+            height={100}
+            alt="company logo"
+            onClick={() => router.push(ROUTE_HOME)}
+          />
+        </div>
+        {!isShowSignup ? (
+          <Signin data={loginContentData} handleOnSignup={handleOnSignup} />
+        ) : (
+          <Signup data={loginContentData} handleOnSignup={handleOnSignup} />
+        )}
       </div>
-      <h4 className="text-black-600 font-bold" onClick={handleBack}>HOME</h4>
     </div>
-    <div
-      className="relative flex flex-col items-center justify-center min-h-screen 
-      overflow-hidden bg-gradient-to-t from-slate-300 to-stone-80">
-      <div>
-        <img
-          className="p-4 cursor-pointer"
-          src={loginContentData.data.companyLogo.url}
-          width={100}
-          height={100}
-          alt="company logo"
-          onClick={() => router.push(ROUTE_HOME)}
-        />
-      </div>
-      {!isShowSignup ? 
-        <Signin data={loginContentData} handleOnSignup={handleOnSignup} /> :
-        <Signup data={loginContentData} handleOnSignup={handleOnSignup} />
-      }
-    </div>
-    </>
   );
 };
 
