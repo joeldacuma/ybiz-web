@@ -1,5 +1,9 @@
 import { authMiddleware } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
+import { CMS_COOKIE_TOKEN } from "@/constants";
+
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export default authMiddleware({
   afterAuth(auth, req) {
@@ -8,9 +12,10 @@ export default authMiddleware({
     }
 
     if (auth.userId && !auth.isPublicRoute) {
+
       return NextResponse.next();
     }
- 
+
     return NextResponse.next();
   },
   publicRoutes: [

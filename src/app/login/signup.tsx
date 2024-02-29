@@ -14,10 +14,19 @@ import { ERROR_SIGNUP_PASSWORD_DONT_MATCH,
          COMPLETE,
          ROUTE_DASHBOARD } from "@/constants";
 import { useRouter } from "next/navigation";
+import { cmsRegister } from "@/providers/AuthProvider";
+
+interface CMSUserProps {
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+}
 
 const Signup = ({ data, handleOnSignup }: any) => {
   const router = useRouter();
-  const { toast } = useToast();
+ 
   const { isLoaded, signUp, setActive } = useSignUp();
   const [pendingVerification, setPendingVerication] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
@@ -33,6 +42,11 @@ const Signup = ({ data, handleOnSignup }: any) => {
     isNotified: false,
     confirmPassword: "",
   });
+
+  const apiCMSRegister = async (body: CMSUserProps) => {
+    const response = await cmsRegister(body);
+    return response;
+  };
 
   const handleSubmit = async (e: any) => {
     setCode('');
@@ -61,7 +75,7 @@ const Signup = ({ data, handleOnSignup }: any) => {
       setErrorMessage({ error: false, message: "" });
       setPendingVerication(true);
     } catch (err: any) {
-      setErrorMessage({ error: true, message: err.errors[0].message });
+      setErrorMessage({ error: true, message: err.errors[0].long_message });
     }
   };
 
@@ -82,10 +96,20 @@ const Signup = ({ data, handleOnSignup }: any) => {
 
       if (completeSignUp.status === COMPLETE) {
         await setActive({ session: completeSignUp.createdSessionId });
-        router.push(ROUTE_DASHBOARD);
+        const cmsUser = await apiCMSRegister({
+          email: formData.email,
+          username: formData.email,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          password: formData.password,
+        });
+
+        if (cmsUser) {
+          router.push(ROUTE_DASHBOARD);
+        }
       }
     } catch(err: any) {
-      setErrorMessage({ error: true, message: err.errors[0].message });
+      setErrorMessage({ error: true, message: err.errors[0].long_message });
     }
   };
 
