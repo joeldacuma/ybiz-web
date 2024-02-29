@@ -5,29 +5,29 @@ import { getLoginContent, getFooter } from "@/providers";
 import { Loader } from "@/components/Loader";
 import { ROUTE_HOME } from "@/constants";
 import { useRouter } from "next/navigation";
-import Signin from "@/app/login/signin";
+import Register from "@/app/signup/register";
 
 import { useQuery } from "@tanstack/react-query";
 
-const Login = () => {
-  const router = useRouter();
+const SignUp = () => {
+    const router = useRouter();
 
-  const { data: loginContent, isPending: isPendingLoginContent } = useQuery({
-    queryKey: ["loginContent"],
-    queryFn: () => getLoginContent(),
-  });
-
-  const {data: footers, isPending: isPendingFooters} = useQuery({
-    queryKey: ["footers"],
-    queryFn: () => getFooter(),
-  });
-
-  const loginContentData: any = loginContent?.loginContent || null;
-  const footersData: any = footers?.footers || null;
-
-  if (isPendingLoginContent || isPendingFooters) {
-    return <Loader />;
-  }
+    const { data: loginContent, isPending: isPendingLoginContent } = useQuery({
+      queryKey: ["loginContent"],
+      queryFn: () => getLoginContent(),
+    });
+  
+    const {data: footers, isPending: isPendingFooters} = useQuery({
+      queryKey: ["footers"],
+      queryFn: () => getFooter(),
+    });
+  
+    const loginContentData: any = loginContent?.loginContent || null;
+    const footersData: any = footers?.footers || null;
+  
+    if (isPendingLoginContent || isPendingFooters) {
+      return <Loader />;
+    }
 
   return (
     <div className="w-full overflow-auto scrollbar-hide bg-gradient-to-t from-slate-300 to-stone-80">
@@ -42,7 +42,7 @@ const Login = () => {
             onClick={() => router.push(ROUTE_HOME)}
           />
         </div>
-          <Signin data={loginContentData} />
+          <Register data={loginContentData} />
         <div className="m-10">
           <p className="text-sm">
             Powered by:
@@ -53,7 +53,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  );
+  )
 };
 
-export default Login;
+export default SignUp;

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ReactQueryProvider } from "@/providers/index";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "YBIZ - Curated Community for Entrepreneurs",
@@ -19,7 +20,8 @@ export default function RootLayout({
       <html className="scroll-smooth" lang="en">
         <body>
           <ReactQueryProvider>
-            <div>{children}</div>
+            <main>{children}</main>
+            <Toaster />
           </ReactQueryProvider>
         </body>
       </html>

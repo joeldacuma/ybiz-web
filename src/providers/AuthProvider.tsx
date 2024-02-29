@@ -1,11 +1,12 @@
-"use server";
+"use server"
 
 import { AxiosInstanceProvider } from "@/providers/index";
 import { cookies } from "next/headers";
 import { CMS_COOKIE_TOKEN } from "@/constants";
+import { CMSUserProps } from "@/interfaces";
 
 
-export const cmsRegister = async (body: any) => {
+export const cmsRegister = async (body: CMSUserProps) => {
   try {
     const response = await AxiosInstanceProvider.post("/auth/local/register", body);
     const data = response.data;
