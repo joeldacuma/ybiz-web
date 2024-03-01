@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import Signin from "@/app/login/signin";
 
 import { useQuery } from "@tanstack/react-query";
-import { signInWithGoogle } from "@/providers";
 
 const Login = () => {
   const router = useRouter();
