@@ -10,6 +10,9 @@ const config = {
 	],
   prefix: "",
   theme: {
+    fontFamily: {
+      'serif': ['"Nunito"', 'sans-serif'],
+    },
     container: {
       center: true,
       padding: "2rem",

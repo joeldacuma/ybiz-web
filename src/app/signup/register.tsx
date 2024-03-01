@@ -7,16 +7,16 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/components/ui/use-toast";
 import { useSignUp } from "@clerk/nextjs";
-import { CMSUserProps, UserProps } from "@/interfaces";
+import { UserProps } from "@/interfaces";
 import { ERROR_SIGNUP_PASSWORD_DONT_MATCH,
          VERIFICATION_CODE_PENDING, 
          RESEND_VERIFICATION_CODE_TEXT,
          RESEND_VERIFICATION_CODE,
          EMAIL_CODE,
          COMPLETE,
-         ROUTE_DASHBOARD } from "@/constants";
+         ROUTE_DASHBOARD,
+         ROUTE_LOGIN } from "@/constants";
 import { useRouter } from "next/navigation";
-import { cmsRegister } from "@/providers/AuthProvider";
 
 const Register = ({ data }: any) => {
   const router = useRouter();
@@ -99,7 +99,7 @@ const Register = ({ data }: any) => {
   };
 
   const handleBacktoLogin = () => {
-    router.push("/login");
+    router.push(ROUTE_LOGIN);
   }
 
   const onChangeSubmit = (value: any) => {
@@ -113,7 +113,7 @@ const Register = ({ data }: any) => {
   }
 
   return (
-    <Card className="animate-fade-up w-full m-4 md:px-24 px-12 py-12 bg-white rounded-2xl shadow-2xl lg:max-w-xl">
+    <Card className="animate-fade-up m-4 md:px-24 px-10 py-12 bg-white rounded-2xl shadow-2xl lg:max-w-xl">
       {!pendingVerification ? (
         <div>
           <div className="text-2xl pb-2 font-medium text-center text-gray-700">
@@ -127,7 +127,7 @@ const Register = ({ data }: any) => {
             <div className="mb-6">
               <label
                 htmlFor="email"
-                className="block text-sm font-semibold text-gray-800"
+                className="block text-sm text-gray-800"
               >
                 Email
               </label>
@@ -144,7 +144,7 @@ const Register = ({ data }: any) => {
             <div className="mb-6">
               <label
                 htmlFor="firstname"
-                className="block text-sm font-semibold text-gray-800"
+                className="block text-sm text-gray-800"
               >
                 First name
               </label>
@@ -161,7 +161,7 @@ const Register = ({ data }: any) => {
             <div className="mb-6">
               <label
                 htmlFor="lastname"
-                className="block text-sm font-semibold text-gray-800"
+                className="block text-sm text-gray-800"
               >
                 Last name
               </label>
@@ -178,7 +178,7 @@ const Register = ({ data }: any) => {
             <div className="mb-6">
               <label
                 htmlFor="password"
-                className="block text-sm font-semibold text-gray-800"
+                className="block text-sm text-gray-800"
               >
                 Password
               </label>
@@ -197,7 +197,7 @@ const Register = ({ data }: any) => {
             <div className="mb-4">
               <label
                 htmlFor="confirmpassword"
-                className="block text-sm font-semibold text-gray-800"
+                className="block text-sm text-gray-800"
               >
                 Confirm Password
               </label>
@@ -237,7 +237,7 @@ const Register = ({ data }: any) => {
                 className="flex items-center justify-center w-full border border-gray-600 
                 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-gray-300"
               >
-                REGISTER
+                <span className="text-xs">REGISTER</span>
               </Button>
             </div>
           </form>
@@ -255,7 +255,7 @@ const Register = ({ data }: any) => {
             <div className="mb-6">
               <label
                 htmlFor="code"
-                className="block text-sm font-semibold text-gray-800"
+                className="block text-sm text-gray-800"
               >
                 Verification Code
               </label>
@@ -295,19 +295,19 @@ const Register = ({ data }: any) => {
                 className="flex items-center justify-center w-full border border-gray-600 
                 rounded-md focus:ring-2 focus:ring-offset-1 focus:ring-gray-300"
               >
-                SUBMIT
+                <span className="text-xs">SUBMIT</span>
               </Button>
             </div>
           </form>
         </div>
       )}
-      <p className="mt-4 text-sm text-center text-gray-700">
+      <p className="mt-4 text-xs text-center text-gray-700">
         Have an account?{" "}
         <span
           onClick={handleBacktoLogin}
-          className="font-bold text-black-600 hover:underline cursor-pointer"
+          className="text-blue-700 hover:underline cursor-pointer"
         >
-          Sign In
+          Login
         </span>
       </p>
     </Card>
