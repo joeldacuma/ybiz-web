@@ -111,3 +111,13 @@ export const createSubscriber = async (data: any) => {
     return { error: error };
   }
 };
+
+export const getDashboardContent = async () => {
+  try {
+    const response = await AxiosInstanceProvider.get("/dashboard?populate=deep&_limit=-1");
+    return { dashboardContent: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  }
+};

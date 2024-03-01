@@ -17,11 +17,16 @@ import { ERROR_SIGNUP_PASSWORD_DONT_MATCH,
          ROUTE_DASHBOARD,
          ROUTE_LOGIN } from "@/constants";
 import { useRouter } from "next/navigation";
+import { EyeOpenIcon, EyeClosedIcon } from "@radix-ui/react-icons";
 
 const Register = ({ data }: any) => {
   const router = useRouter();
   const { toast } = useToast();
   const { isLoaded, signUp, setActive } = useSignUp();
+  const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isShowPasswordType, setIsShowPasswordType] = useState("password");
+  const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
+  const [isShowConfirmPasswordType, setIsShowConfirmPasswordType] = useState("password");
   const [pendingVerification, setPendingVerication] = useState(false);
   const [errorMessage, setErrorMessage] = useState({
     error: false,
@@ -36,6 +41,31 @@ const Register = ({ data }: any) => {
     isNotified: false,
     confirmPassword: "",
   });
+
+  const handleClickShowPassword = () => {
+    if (!isShowPassword) { 
+    setIsShowPassword(true);
+    setIsShowPasswordType("text");
+    
+    return;
+    }
+    
+    setIsShowPassword(false);
+    setIsShowPasswordType("password");
+  };
+
+  const handleClickShowConfirmPassword = () => {
+    if (!isShowConfirmPassword) { 
+    setIsShowConfirmPassword(true);
+    setIsShowConfirmPasswordType("text");
+    
+    return;
+    }
+    
+    setIsShowConfirmPassword(false);
+    setIsShowConfirmPasswordType("password");
+  };
+    
 
   const handleSubmit = async (e: any) => {
     setCode('');
@@ -183,11 +213,15 @@ const Register = ({ data }: any) => {
                 Password
               </label>
               <div className="relative h-10 w-full">
+              {!isShowPassword ?
+                <EyeOpenIcon onClick={handleClickShowPassword} className="absolute w-5 h-5 text-gray-500 top-2 right-3" />
+                : <EyeClosedIcon onClick={handleClickShowPassword} className="absolute w-5 h-5 text-gray-500 top-2 right-3" />
+               }
                 <Input
                   onChange={(e) =>
                     onChangeSubmit({ ...formData, password: e.target.value })
                   }
-                  type="password"
+                  type={isShowPasswordType}
                   placeholder="Enter password..."
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md 
                 focus:border-gray-300 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
@@ -202,6 +236,10 @@ const Register = ({ data }: any) => {
                 Confirm Password
               </label>
               <div className="relative h-10 w-full">
+              {!isShowConfirmPassword ?
+                <EyeOpenIcon onClick={handleClickShowConfirmPassword} className="absolute w-5 h-5 text-gray-500 top-2 right-3" />
+                : <EyeClosedIcon onClick={handleClickShowConfirmPassword} className="absolute w-5 h-5 text-gray-500 top-2 right-3" />
+               }
                 <Input
                   onChange={(e) =>
                     onChangeSubmit({
@@ -209,7 +247,7 @@ const Register = ({ data }: any) => {
                       confirmPassword: e.target.value,
                     })
                   }
-                  type="password"
+                  type={isShowConfirmPasswordType}
                   placeholder="Confirm password..."
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border rounded-md 
                 focus:border-gray-300 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
