@@ -91,3 +91,23 @@ export const getLoginContent = async () => {
     return { error: error };
   }
 };
+
+export const getSubscriberByUserId = async (userId: number) => {
+  try {
+    const response = await AxiosInstanceProvider.get(`/subscribers/${userId}?populate=deep&_limit=-1`);
+    return { subscriber: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  }
+};
+
+export const createSubscriber = async (data: any) => {
+  try {
+    const response = await AxiosInstanceProvider.post("/subscribers", data);
+    return { subscriber: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  }
+};

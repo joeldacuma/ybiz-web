@@ -1,28 +1,26 @@
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { APIResponse } from "@/types";
-import { firebaseAuth } from "@/lib/firebase/firebase";
+"use server"
+
+import { AxiosInstanceProvider } from "@/providers/index";
+import { cookies } from "next/headers";
+import { CMS_COOKIE_TOKEN } from "@/constants";
+import { CMSUserProps } from "@/interfaces";
 
 
-export async function signInWithGoogle() {
-    const provider = new GoogleAuthProvider();
-  
-    try {
-      const userCreds = await signInWithPopup(firebaseAuth, provider);
-      const idToken = await userCreds.user.getIdToken();
-  
-      const response = await fetch("/api/auth/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ idToken }),
-      });
-      const resBody = (await response.json()) as unknown as APIResponse<string>;
-      if (response.ok && resBody.success) {
-        return true;
-      } else return false;
-    } catch (error) {
-      console.error("Error signing in with Google", error);
-      return false;
-    }
+export const cmsRegister = async (body: CMSUserProps) => {
+  try {
+    const response = await AxiosInstanceProvider.post("/auth/local/register", body);
+    const data = response.data;
+    cookies().set({
+      name: CMS_COOKIE_TOKEN,
+      value: data.jwt,
+      maxAge: 60 * 60 * 24,
+      httpOnly: true,
+      sameSite: "strict",
+    });
+    
+    const result = response.data;
+    return { result: result };
+  } catch (error) {
+    return { error: error };
   }
+};

@@ -67,6 +67,12 @@
     --ring: 240 4.9% 83.9%;
   }
 }
+
+@layer base {
+  html {
+    font-family: "Nunito", sans-serif;
+  }
+}
  
 @layer base {
   * {
@@ -85,6 +91,10 @@
   .animation-delay-400 {
     animation-delay: 0.4s;
   }
+}
+
+.cl-formButtonPrimary {
+  @apply bg-black text-primary-foreground;   
 }
 
 .circle {

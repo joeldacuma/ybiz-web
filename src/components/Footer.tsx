@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState } from "react";
+import Link from "next/link";
 
 const Footer = ({data}: any) => {
   const year = new Date().getFullYear();
@@ -14,7 +15,9 @@ const Footer = ({data}: any) => {
           <span className="ml-3 text-xl">{footers.data.subtitle}</span>
         </a>
         <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-          © {year} {footers.data.subtitle}
+          © {year} powered by <Link target={"_blank"} className="hover:underline hover:text-blue-500" href={footers.data.poweredByLink}>
+          {footers.data.poweredBy}
+          </Link>
         </p>
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
           {
