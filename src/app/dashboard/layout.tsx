@@ -26,7 +26,7 @@ const MainLayout = ({children}: any) => {
   return (
     <div className="flex bg-gray-100 h-screen overflow-hidden">
         <Sidemenu footerData={footers} data={dashboardContent} />
-        <div>
+        <div className="flex justify-center text-center w-full">
           <Header data={dashboardContent} />
           {children}
         </div>

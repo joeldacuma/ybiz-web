@@ -12,7 +12,7 @@ const Settings = () => {
     <main className="pt-16 max-h-screen">
       <div className="px-6 py-8">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-3xl p-8 mb-5">
+          <div className="bg-white rounded-3xl p-12 mb-5">
             <h1 className="text-3xl font-bold mb-10">Settings</h1>
 
             <hr className="my-10" />
