@@ -4,7 +4,6 @@ export const ROUTE_SIGNUP = "/signup";
 export const ROUTE_DASHBOARD = "/dashboard";
 export const EMAIL_CODE = "email_code";
 export const COMPLETE = "complete";
-export const CMS_COOKIE_TOKEN = "cms-userToken";
 
 // MESSAGE
 export const ERROR_SIGNUP_PASSWORD_DONT_MATCH = "password do not match.";

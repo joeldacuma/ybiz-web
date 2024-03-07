@@ -6,9 +6,11 @@ import Footer from "./Footer";
 import { useQuery } from "@tanstack/react-query";
 import { getHeaders, getFooter } from "@/providers";
 import { Loader } from "@/components/Loader";
+import { useAuth } from "@clerk/nextjs";
 
 
 export default function Container({ children }: any) {
+  const { isSignedIn } = useAuth();
   const {data: headers, isPending: isPendingHeaders} = useQuery({
     queryKey: ["headers"],
     queryFn: () => getHeaders(),
@@ -26,7 +28,7 @@ export default function Container({ children }: any) {
   return (
     <>
       <div className="w-full overflow-hidden bg-gradient-to-t from-zinc-50 to-gray-50">
-        <Navbar data={headers} />
+        <Navbar signedIn={isSignedIn} data={headers} />
         <div className="drawer-content flex flex-col">
           <div>{children}</div>
         </div>
