@@ -8,6 +8,7 @@ import { getDashboardContent, getFooter } from "@/providers";
 import { Loader } from "@/components/Loader";
 
 const MainLayout = ({children}: any) => {
+  const [openMenu, setOpenMenu] = useState('absolute');
   const { data: dashboardContent, isLoading: isLoadingDashboard } = useQuery({
     queryKey: ["dashboard"],
     queryFn: () => getDashboardContent()
@@ -18,6 +19,12 @@ const MainLayout = ({children}: any) => {
     queryFn: () => getFooter()
   });
 
+  const handleSetOpenMenu = () => {
+    setOpenMenu(openMenu === 'hidden' ? 
+    'absolute animate-fade-right animate-duration-150 animate-once animate-ease-in' : 
+    'hidden');
+  };
+
   if (isLoadingDashboard || 
       isLoadingFooter) {
     return <Loader />;
@@ -25,9 +32,9 @@ const MainLayout = ({children}: any) => {
 
   return (
     <div className="flex bg-gray-100 h-screen overflow-hidden">
-        <Sidemenu footerData={footers} data={dashboardContent} />
-        <div className="flex justify-center text-center w-full">
-          <Header data={dashboardContent} />
+        <Sidemenu handleSetOpenMenu={handleSetOpenMenu} openMenu={openMenu} footerData={footers} data={dashboardContent} />
+        <div className="flex flex-col text-center w-full">
+          <Header openMenu={openMenu} handleSetOpenMenu={handleSetOpenMenu} data={dashboardContent} />
           {children}
         </div>
     </div>

@@ -1,8 +1,6 @@
 import React from "react";
 import { Card, 
-         CardHeader, 
-         CardDescription, 
-         CardContent, 
+         CardHeader,  
          CardTitle,
          CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -17,11 +15,11 @@ const Settings = () => {
 
             <hr className="my-10" />
 
-            <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-10">
+            <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-10">
               <div>
-                <h2 className="text-2xl font-bold mb-4">Membership</h2>
+                <h2 className="text-2xl text-left font-bold mb-4">Membership</h2>
                 <div className="space-y-4">
-                  <Card className="w-80 bg-white border rounded-xl text-gray-800 space-y-2">
+                  <Card className="w-full bg-white border rounded-xl text-gray-800 space-y-2">
                     {/* <div className="flex justify-between">
                       <div className="text-gray-400 text-xs">You are in Premium Plan</div>
                     </div>
@@ -44,9 +42,9 @@ const Settings = () => {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold mb-4">Payment Method</h2>
+                <h2 className="text-2xl text-left font-bold mb-4">Payment Method</h2>
                 <div className="space-y-4">
-                <Card className="w-80 bg-white border rounded-xl text-gray-800 space-y-2">
+                <Card className="w-full bg-white border rounded-xl text-gray-800 space-y-2">
                     {/* <div className="flex justify-between">
                       <div className="text-gray-400 text-xs">You are in Premium Plan</div>
                     </div>
