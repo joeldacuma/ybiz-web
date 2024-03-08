@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html className="scroll-smooth" lang="en">
-        <body>
+        <body className="bg-gray-100">
           <ReactQueryProvider>
             <main>{children}</main>
             <Toaster />

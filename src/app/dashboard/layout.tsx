@@ -9,6 +9,7 @@ import { Loader } from "@/components/Loader";
 
 const MainLayout = ({children}: any) => {
   const [openMenu, setOpenMenu] = useState('absolute');
+  const [verticalScroll, setVerticalScroll] = useState(0);
   const { data: dashboardContent, isLoading: isLoadingDashboard } = useQuery({
     queryKey: ["dashboard"],
     queryFn: () => getDashboardContent()
@@ -18,6 +19,21 @@ const MainLayout = ({children}: any) => {
     queryKey: ["footers"],
     queryFn: () => getFooter()
   });
+
+  const handleSrollVertical = () => {
+    setVerticalScroll(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleSrollVertical);
+    return () => {
+      if (verticalScroll > 0) {
+        setOpenMenu('hidden');
+      }
+      window.removeEventListener('scroll', handleSrollVertical);
+    };
+
+  }, [verticalScroll]);
 
   const handleSetOpenMenu = () => {
     setOpenMenu(openMenu === 'hidden' ? 
@@ -31,12 +47,14 @@ const MainLayout = ({children}: any) => {
   }
 
   return (
-    <div className="flex bg-gray-100 min-h-screen">
-        <Sidemenu handleSetOpenMenu={handleSetOpenMenu} openMenu={openMenu} footerData={footers} data={dashboardContent} />
-        <div className="flex flex-col text-center w-full">
+    <div className="grid bg-gray-100">
+      <div className="flex min-h-screen">
+        <Sidemenu footerData={footers} openMenu={openMenu} handleSetOpenMenu={handleSetOpenMenu} data={dashboardContent} />
+        <div className="h-full w-full">
           <Header openMenu={openMenu} handleSetOpenMenu={handleSetOpenMenu} data={dashboardContent} />
           {children}
         </div>
+      </div>
     </div>
   );
 };

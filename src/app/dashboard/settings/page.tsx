@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 
 const Settings = () => {
   return (
-    <main className="pt-16 max-h-screen">
-      <div className="px-6 py-8">
+    <div className="max-h-screen">
+      <div className="px-6 py-2">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-3xl p-12 mb-5">
             <h1 className="text-3xl font-bold mb-10">Settings</h1>
@@ -67,9 +67,18 @@ const Settings = () => {
               </div>
             </div>
           </div>
+          <div className="bg-white rounded-3xl p-12 mb-5">
+            <h1 className="text-3xl font-bold mb-10">Settings</h1>
+
+            <hr className="my-10" />
+
+            <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-10">
+   
+            </div>
+          </div>
         </div>
       </div>
-    </main>
+    </div>
   )
 }
 

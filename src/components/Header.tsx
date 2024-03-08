@@ -10,7 +10,7 @@ const Header = ({data, openMenu, handleSetOpenMenu}: any) => {
   const router = useRouter();
 
   return (
-    <header className="bg-gray-100 right-0 top-0 left-60 py-4 px-4 md:px-6 h-16">
+    <header className="bg-gray-100 right-0 top-0 left-60 py-4 px-4 md:px-6 h-20">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between">
           <div className="flex gap-4">
@@ -28,9 +28,9 @@ const Header = ({data, openMenu, handleSetOpenMenu}: any) => {
           </div>
           <div className="flex items-center gap-4">
             <Button
-              onClick={handleSetOpenMenu}
               variant="ghost"
-              className="flex items-center focus:outline-none rounded-lg text-white
+              onClick={handleSetOpenMenu}
+              className="lg:hidden flex items-center focus:outline-none rounded-lg text-white
               font-semibold p-2  transition">
               <span className="text-sm text-gray-700 focus:ring-2">
                 {openMenu === 'hidden' ?
