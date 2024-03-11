@@ -48,7 +48,7 @@ const MainLayout = ({children}: any) => {
 
   return (
     <div className="grid bg-gray-100">
-      <div className="flex min-h-screen">
+      <div className="flex max-h-screen">
         <Sidemenu footerData={footers} openMenu={openMenu} handleSetOpenMenu={handleSetOpenMenu} data={dashboardContent} />
         <div className="h-full w-full">
           <Header openMenu={openMenu} handleSetOpenMenu={handleSetOpenMenu} data={dashboardContent} />

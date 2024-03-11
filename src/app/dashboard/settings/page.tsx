@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 const Settings = () => {
   return (
     <div className="max-h-screen">
-      <div className="px-6 py-4">
+      <div>
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-3xl p-12 mb-5">
             <h1 className="text-3xl font-bold mb-10">Settings</h1>

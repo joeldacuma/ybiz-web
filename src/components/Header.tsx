@@ -10,7 +10,7 @@ const Header = ({data, openMenu, handleSetOpenMenu}: any) => {
   const router = useRouter();
 
   return (
-    <header className="bg-gray-100 right-0 top-0 left-60 py-4 px-4 md:px-6 h-20">
+    <header className="bg-gray-100 right-0 top-0 left-60 py-4 px-6 md:px-6 h-20">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between">
           <div className="flex gap-4">
