@@ -121,3 +121,13 @@ export const getDashboardContent = async () => {
     return { error: error };
   }
 };
+
+export const getUserSurveyContent = async () => {
+  try {
+    const response = await AxiosInstanceProvider.get("/user-survey-profile?populate=deep&_limit=-1");
+    return { userSurveyContent: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  }
+};
