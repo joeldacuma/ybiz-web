@@ -2,6 +2,7 @@ export const ROUTE_LOGIN = "/login";
 export const ROUTE_HOME =  "/home";
 export const ROUTE_SIGNUP = "/signup";
 export const ROUTE_DASHBOARD = "/dashboard";
+export const ROUTE_USER_SURVEY = "/survey/user/";
 export const EMAIL_CODE = "email_code";
 export const COMPLETE = "complete";
 

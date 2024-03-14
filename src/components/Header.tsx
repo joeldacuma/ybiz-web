@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
 
-const Header = ({data, openMenu, handleSetOpenMenu}: any) => {
+const Header = ({data, openMenu, handleSetOpenMenu, menuDisabled}: any) => {
   const [headers] = useState(data.dashboardContent);
   const router = useRouter();
 
@@ -14,6 +14,7 @@ const Header = ({data, openMenu, handleSetOpenMenu}: any) => {
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between">
           <div className="flex gap-4">
+            {!menuDisabled && 
             <Button
               variant="ghost"
               onClick={handleSetOpenMenu}
@@ -25,7 +26,7 @@ const Header = ({data, openMenu, handleSetOpenMenu}: any) => {
                   <LineHeightIcon className="w-8 h-8" />
                 }
               </span>
-            </Button>
+            </Button>}
             {headers.data.Headermenu.map((item: any) => (
             <Button
               key={item.id}

@@ -6,7 +6,7 @@ import { DataContext } from "@/providers/ContextProvider";
 import { SurveyInput } from "@/components/SurveyInput";
 import { useRouter } from "next/navigation";
 import SurveyHeader from "@/components/SurveyHeader";
-import { INPUT_SURVEY_EMPTY_MESSAGE } from "@/constants";
+import { INPUT_SURVEY_EMPTY_MESSAGE, ROUTE_USER_SURVEY } from "@/constants";
 import { setSessionItem, getSessionItem } from "@/lib/utils";
 
 const UserSurvey = ({ params }: { params: { surveyId: number, value: string } }) => {
@@ -22,17 +22,24 @@ const UserSurvey = ({ params }: { params: { surveyId: number, value: string } })
 
   useEffect(() => {
     fetchUserSurveyData();
-  }, []);
+  },[]);
 
   const handleSubmitSurvey = (value: any) => {
+    const questionsArray = userSurveyContent.data.Questions;
+
     if (!value) {
       setErrorMessage(INPUT_SURVEY_EMPTY_MESSAGE);
       return;
     }
 
+    if (parseInt(surveyId) === questionsArray.length) {
+      router.push(`${ROUTE_USER_SURVEY}preview`);
+      return;
+    }
+
     const surveyValue = setSessionItem(`survey-input${surveyId}`, value);
     const nextSurveyId = parseInt(surveyId) + 1;
-    router.push(`/survey/user/${nextSurveyId}`);
+    router.push(`${ROUTE_USER_SURVEY}${nextSurveyId}`);
   };
 
   const fetchUserSurveyData = () => {
