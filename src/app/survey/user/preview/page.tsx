@@ -11,7 +11,7 @@ import { getSessionItem } from "@/lib/utils";
 import { DataContext } from "@/providers/ContextProvider";
 import { Pencil2Icon } from "@radix-ui/react-icons";
 import { useRouter } from "next/navigation";
-import { ROUTE_DASHBOARD } from "@/constants";
+import { ROUTE_DASHBOARD, ROUTE_USER_SURVEY } from "@/constants";
 
 const SurveyPreview = () => {
   const router = useRouter();
@@ -28,7 +28,7 @@ const SurveyPreview = () => {
   };
 
   const handleEditUserSurvey = () => {
-    router.push("/survey/user/1");
+    router.push(`${ROUTE_USER_SURVEY}/1`);
   };
 
   const handleCancelUserSurvey = () => {
@@ -36,6 +36,7 @@ const SurveyPreview = () => {
   };
 
   const handleSubmitSurvey = () => {
+    
     router.push(ROUTE_DASHBOARD);
   };
 
@@ -46,7 +47,7 @@ const SurveyPreview = () => {
   return (
     <>
       <Header menuDisabled={true} data={dashboardContent} />
-      <div className="lg:max-h-screen">
+      <div className="lg:min-h-screen">
         <div>
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-3xl p-12 mb-5">

@@ -15,6 +15,7 @@ import { ERROR_SIGNUP_PASSWORD_DONT_MATCH,
          EMAIL_CODE,
          COMPLETE,
          ROUTE_DASHBOARD,
+         ERROR_LOGIN_VERIFICATION_MESSAGE,
          ROUTE_LOGIN } from "@/constants";
 import { useRouter } from "next/navigation";
 import { EyeOpenIcon, EyeClosedIcon } from "@radix-ui/react-icons";
@@ -110,7 +111,7 @@ const Register = ({ data }: any) => {
       });
 
       if (completeSignUp.status !== COMPLETE) {
-
+        setErrorMessage({ error: true, message: ERROR_LOGIN_VERIFICATION_MESSAGE });
       }
 
       if (completeSignUp.status === COMPLETE) {

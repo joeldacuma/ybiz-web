@@ -1,3 +1,4 @@
+
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -10,8 +11,8 @@ export function setItem(key: string, value: any) {
   localStorage.setItem(key, value);
 }
 
-export function getItem(key: string) {
-  return localStorage.getItem(key);
+export function getItem(key: any) {
+  return typeof window !== "undefined" ? localStorage.getItem(key) : null;
 };
 
 export function removeItem(key: string) {
@@ -22,7 +23,7 @@ export function setSessionItem(key: string, value: any) {
   sessionStorage.setItem(key, value);
 }
 
-export function getSessionItem(key: string) {
+export function getSessionItem(key: any) {
   return sessionStorage.getItem(key);
 };
 

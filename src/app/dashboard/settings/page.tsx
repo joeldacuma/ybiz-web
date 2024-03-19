@@ -62,7 +62,7 @@ const Settings = () => {
                         Cancel
                       </Button>
                     </CardFooter>                    
-                  </Card>
+                </Card>
                 </div>
               </div>
             </div>

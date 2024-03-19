@@ -131,3 +131,13 @@ export const getUserSurveyContent = async () => {
     return { error: error };
   }
 };
+
+export const createMembersContentDetails = async (body: any) => {
+  try {
+    const response = await AxiosInstanceProvider.post("/members?populate=deep&_limit=-1", body);
+    return { membersContentDetails: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  }
+};
