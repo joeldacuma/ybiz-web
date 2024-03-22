@@ -15,3 +15,16 @@ export interface UserProps {
   isNotified: boolean;
   confirmPassword: string;
 };
+
+export interface MembersProps {
+  entrepreneurStatus: string;
+  businessName: string;
+  businessSize: string;
+  businessIndustry: string;
+  businessYears: string;
+  businessPurpose: string;
+  businessEarnings: string;
+  businessTarget: string;
+  email: string;
+  userId: string;
+};

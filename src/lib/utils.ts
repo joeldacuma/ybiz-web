@@ -2,7 +2,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -24,7 +23,7 @@ export function setSessionItem(key: string, value: any) {
 }
 
 export function getSessionItem(key: any) {
-  return sessionStorage.getItem(key);
+  return typeof window !== "undefined" ? sessionStorage.getItem(key) : null;
 };
 
 export function removeSessionItem(key: string) {

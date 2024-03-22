@@ -31,15 +31,14 @@ const UserSurvey = ({ params }: { params: { surveyId: number, value: string } })
       setErrorMessage(INPUT_SURVEY_EMPTY_MESSAGE);
       return;
     }
-
+    
+    const surveyValue = setSessionItem(`survey-input${surveyId}`, value);
     if (parseInt(surveyId) === questionsArray.length) {
       router.push(`${ROUTE_USER_SURVEY}/preview`);
       return;
     }
 
-    const surveyValue = setSessionItem(`survey-input${surveyId}`, value);
-    const nextSurveyId = parseInt(surveyId) + 1;
-    router.push(`${ROUTE_USER_SURVEY}/${nextSurveyId}`);
+    router.push(`${ROUTE_USER_SURVEY}/${parseInt(surveyId) + 1}`);
   };
 
   const fetchUserSurveyData = () => {

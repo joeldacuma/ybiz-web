@@ -1,21 +1,25 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import Sidemenu from "@/components/Sidemenu";
 import { Header } from "@/components/Header";
 import { useQuery } from "@tanstack/react-query";
-import { getDashboardContent, getUserSurveyContent, getFooter } from "@/providers";
+import { getDashboardContent, 
+         getUserSurveyContent, 
+         getMembersContentDetails,
+         getFooter } from "@/providers";
 import { Loader } from "@/components/Loader";
 import DialogMessageModal from "@/components/DialogMessageModal";
-import { getItem } from "@/lib/utils";
-import { USER_PROFILE_DETAILS_SURVEY_ID, ROUTE_USER_SURVEY } from "@/constants";
+import { ROUTE_USER_SURVEY, USER_PROFILE_ID } from "@/constants";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
+import { getItem, setItem } from "@/lib/utils";
 
 const MainLayout = ({children}: any) => {
+  const {user, isLoaded} = useUser();  
   const [openMenu, setOpenMenu] = useState('absolute');
   const [isUserProfile, setIsUserProfile] = useState(false);
   const [verticalScroll, setVerticalScroll] = useState(0);
-  const [userProfileInfo, setUserProfileInfo] = useState<any>( getItem(USER_PROFILE_DETAILS_SURVEY_ID) || null);
   const { data: dashboardContent, isLoading: isLoadingDashboard } = useQuery({
     queryKey: ["dashboard"],
     queryFn: () => getDashboardContent()
@@ -28,6 +32,7 @@ const MainLayout = ({children}: any) => {
     queryKey: ["footers"],
     queryFn: () => getFooter()
   });
+
   const router = useRouter();
 
   const handleSrollVertical = () => {
@@ -35,8 +40,9 @@ const MainLayout = ({children}: any) => {
   };
 
   useEffect(() => {
-    if (!userProfileInfo) {
-      setIsUserProfile(true);
+    const _userId = getItem(USER_PROFILE_ID);
+    if (isLoaded && !_userId) {
+      setItem(USER_PROFILE_ID, user?.id);
     }
 
     window.addEventListener('scroll', handleSrollVertical);
@@ -47,7 +53,7 @@ const MainLayout = ({children}: any) => {
       window.removeEventListener('scroll', handleSrollVertical);
     };
 
-  }, [verticalScroll]);
+  }, [verticalScroll, user, isLoaded]);
 
   const handleSetOpenMenu = () => {
     setOpenMenu(openMenu === 'hidden' ? 
@@ -62,7 +68,7 @@ const MainLayout = ({children}: any) => {
   const handleSubmitButtonModal = () => {
    router.push(`${ROUTE_USER_SURVEY}/1`);
   };
-
+  
   if (isLoadingDashboard || 
       isLoadingFooter) {
     return <Loader />;

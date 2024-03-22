@@ -1,6 +1,7 @@
 "use client"
 
 import { AxiosInstanceProvider } from "@/providers/index";
+import { MembersProps } from "@/interfaces";
 
 export const getHeaders = async () => {
   try {
@@ -132,9 +133,19 @@ export const getUserSurveyContent = async () => {
   }
 };
 
-export const createMembersContentDetails = async (body: any) => {
+export const getMembersContentDetails = async (userId: any) => {
   try {
-    const response = await AxiosInstanceProvider.post("/members?populate=deep&_limit=-1", body);
+    const response = await AxiosInstanceProvider.get(`/members/${userId}?populate=deep&_limit=-1`);
+    return { membersContentDetails: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  }
+};
+
+export const createMembersContentDetails = async (body: MembersProps) => {
+  try {
+    const response = await AxiosInstanceProvider.post<MembersProps>("/members?populate=deep&_limit=-1", body);
     return { membersContentDetails: response.data };
   } 
   catch (error) {

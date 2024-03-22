@@ -1,6 +1,6 @@
 "use client" 
 
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import Container  from "@/components/Container";
 import HeroBanner from "@/app/home/hero";
 import HomeFeatures from "@/app/home/feature";
@@ -9,6 +9,9 @@ import HomeGallery from "@/app/home/gallery";
 import HomeTestimonial from "./testimonial";
 import HomeInformation from "./information";
 import { Loader } from "@/components/Loader";
+import { useUser } from "@clerk/nextjs";
+import { getItem, removeItem } from "@/lib/utils";
+import { USER_PROFILE_ID } from "@/constants";
 
 import { getBanners,
          getFeatures,
@@ -21,6 +24,7 @@ import { useQuery } from "@tanstack/react-query";
 
 
 const Home = () => {
+  const { isSignedIn } = useUser();
   const {data: banners, isPending: isPendingBanners} = useQuery({
     queryKey: ["banners"],
     queryFn: () => getBanners()
@@ -59,7 +63,14 @@ const Home = () => {
       isPendingInformations) {
     return <Loader />
   }
-  
+
+  if (!isSignedIn) {
+    const _userId = getItem(USER_PROFILE_ID);
+    if (_userId) {
+      removeItem(USER_PROFILE_ID);
+    }
+  }
+
   return (
    <>
    <Suspense fallback={
