@@ -20,6 +20,7 @@ const MainLayout = ({children}: any) => {
   const [openMenu, setOpenMenu] = useState('absolute');
   const [isUserProfile, setIsUserProfile] = useState(false);
   const [verticalScroll, setVerticalScroll] = useState(0);
+  const _userId = getItem(USER_PROFILE_ID);
   const { data: dashboardContent, isLoading: isLoadingDashboard } = useQuery({
     queryKey: ["dashboard"],
     queryFn: () => getDashboardContent()
@@ -32,6 +33,10 @@ const MainLayout = ({children}: any) => {
     queryKey: ["footers"],
     queryFn: () => getFooter()
   });
+  const {data:userSurveyInfo, isLoading:isLoadinguserSurveyInfo} = useQuery({
+    queryKey: ["userSurveyInfo"],
+    queryFn: () => getMembersContentDetails(_userId)
+  });
 
   const router = useRouter();
 
@@ -40,9 +45,12 @@ const MainLayout = ({children}: any) => {
   };
 
   useEffect(() => {
-    const _userId = getItem(USER_PROFILE_ID);
     if (isLoaded && !_userId) {
       setItem(USER_PROFILE_ID, user?.id);
+    }
+
+    if (userSurveyInfo?.error || !userSurveyInfo) {
+      setIsUserProfile(true);
     }
 
     window.addEventListener('scroll', handleSrollVertical);
@@ -53,7 +61,7 @@ const MainLayout = ({children}: any) => {
       window.removeEventListener('scroll', handleSrollVertical);
     };
 
-  }, [verticalScroll, user, isLoaded]);
+  }, [verticalScroll, user, isLoaded, userSurveyInfo, userContentSurvey]);
 
   const handleSetOpenMenu = () => {
     setOpenMenu(openMenu === 'hidden' ? 
@@ -70,7 +78,9 @@ const MainLayout = ({children}: any) => {
   };
   
   if (isLoadingDashboard || 
-      isLoadingFooter) {
+      isLoadingFooter ||
+      isUserContentSurvey||
+      isLoadinguserSurveyInfo) { 
     return <Loader />;
   }
 
