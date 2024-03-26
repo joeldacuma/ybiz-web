@@ -14,7 +14,7 @@ export const RESEND_VERIFICATION_CODE = "Resend code";
 export const ERROR_LOGIN_VERIFICATION_MESSAGE = "Invalid verification code.";
 
 // VALIDATION
-export const USER_PROFILE_ID = "user_id";
+export const USER_PROFILE_ID = "ybiz_user_id";
 export const INPUT_SURVEY_TRUE = "YES";
 export const INPUT_SURVEY_FALSE = "NO";
 export const INPUT_SURVEY_EMPTY_MESSAGE = "Please enter your answer.";

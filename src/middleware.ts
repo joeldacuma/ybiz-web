@@ -3,12 +3,10 @@ import { NextResponse } from "next/server";
 import { ROUTE_DASHBOARD, 
          ROUTE_LOGIN,
          ROUTE_SIGNUP } from "@/constants";
-import { getItem } from "@/lib/utils";
 
 
 export default authMiddleware({
   afterAuth(auth, req) {
-    const _userId:any = auth.userId;
     const response = (url: any = undefined) => {
       if (!url) {
         return NextResponse.next();
