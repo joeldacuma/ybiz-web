@@ -14,6 +14,7 @@ import { ROUTE_USER_SURVEY, USER_PROFILE_ID } from "@/constants";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { getItem, setItem } from "@/lib/utils";
+import ContextProvider from "@/providers/ContextProvider";
 
 const MainLayout = ({children}: any) => {
   const {user, isLoaded} = useUser();  
@@ -37,6 +38,10 @@ const MainLayout = ({children}: any) => {
     queryKey: ["userSurveyInfo"],
     queryFn: () => getMembersContentDetails(_userId)
   });
+  const [contentInfo, setContentInfo] = useState<any>({
+    userContent: null,
+    surveyInfo: null
+  });
 
   const router = useRouter();
 
@@ -52,6 +57,12 @@ const MainLayout = ({children}: any) => {
     if (userSurveyInfo?.error || !userSurveyInfo) {
       setIsUserProfile(true);
     }
+
+    setContentInfo({
+      userContent: userContentSurvey,
+      surveyInfo: userSurveyInfo
+    
+    });
 
     window.addEventListener('scroll', handleSrollVertical);
     return () => {
@@ -95,7 +106,9 @@ const MainLayout = ({children}: any) => {
         <Sidemenu footerData={footers} openMenu={openMenu} handleSetOpenMenu={handleSetOpenMenu} data={dashboardContent} />
         <div className="h-full w-full">
           <Header openMenu={openMenu} handleSetOpenMenu={handleSetOpenMenu} data={dashboardContent} />
-          {children}
+          <ContextProvider data={contentInfo}>
+            {children}
+          </ContextProvider>
         </div>
       </div>
     </div>

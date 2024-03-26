@@ -18,3 +18,15 @@ export const USER_PROFILE_ID = "user_id";
 export const INPUT_SURVEY_TRUE = "YES";
 export const INPUT_SURVEY_FALSE = "NO";
 export const INPUT_SURVEY_EMPTY_MESSAGE = "Please enter your answer.";
+
+// MAPPING
+export const USER_SURVEY_MAPPING = [
+  'entrepreneurStatus',
+  'businessName',
+  'businessSize',
+  'businessIndustry',
+  'businessYears',
+  'businessPurpose',
+  'businessEarnings',
+  'businessTarget',
+];

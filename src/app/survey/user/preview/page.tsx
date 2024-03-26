@@ -49,6 +49,7 @@ const SurveyPreview = () => {
   };
 
   const handleCancelUserSurvey = () => {
+   clearSessionItem();
    router.push(ROUTE_DASHBOARD);
   };
 
