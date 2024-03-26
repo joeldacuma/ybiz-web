@@ -15,13 +15,13 @@ const Settings = () => {
   const data: any = useContext(DataContext);
   const { surveyInfo, userContent } = data;
 
+  const handleEditUserSurvey = useCallback(() => {
+    if (!surveyInfo?.error) {
+      userContent?.userSurveyContent?.data?.Questions.map((value:any, index:number) => {
+        setSessionItem(`survey-input${index + 1}`, surveyInfo.membersContentDetails[USER_SURVEY_MAPPING[index]]);
+      });
+    }
 
-
-  const handleEditUserSurvey =  useCallback(() => {
-    userContent?.userSurveyContent?.data?.Questions.map((value:any, index:number) => {
-      console.log(USER_SURVEY_MAPPING[index]);
-      setSessionItem(`survey-input${index + 1}`, surveyInfo.membersContentDetails[USER_SURVEY_MAPPING[index]]);
-    });
     router.push(`/survey/user/1`);
   }, [userContent, surveyInfo]);
 
@@ -33,8 +33,8 @@ const Settings = () => {
             <h1 className="text-3xl font-bold">Profile Information</h1>
             <hr className="my-10" />
             <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-10">
-            {(data?.error) ? (<div>
-                <Button className="w-full">Edit Info</Button>
+            {(surveyInfo?.error || !data) ? (<div>
+                <Button onClick={handleEditUserSurvey}>Edit Info</Button>
               </div>) :
               (<div className="space-y-4">
                 <Card className="w-full bg-white border rounded-xl text-gray-800 space-y-2">
@@ -50,7 +50,7 @@ const Settings = () => {
                       <div key={index}>
                         <CardTitle className="py-4">{survey.Question}</CardTitle>
                         <span className="text-gray-400 text-md">
-                          {surveyInfo.membersContentDetails[USER_SURVEY_MAPPING[index]]}                               
+                          {surveyInfo?.membersContentDetails[USER_SURVEY_MAPPING[index]]}                               
                         </span>
                       </div>
                     ))
