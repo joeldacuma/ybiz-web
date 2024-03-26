@@ -33,7 +33,7 @@ const Settings = () => {
             <h1 className="text-3xl font-bold">Profile Information</h1>
             <hr className="my-10" />
             <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-10">
-              {(data?.error) ? (<div>
+            {(data?.error) ? (<div>
                 <Button className="w-full">Edit Info</Button>
               </div>) :
               (<div className="space-y-4">
@@ -58,53 +58,6 @@ const Settings = () => {
                   </CardHeader>
                 </Card>
               </div>)}
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-10 py-6">
-              <div>
-                <h2 className="text-2xl text-left font-bold mb-4">
-                  Membership
-                </h2>
-                <div className="space-y-4">
-                  <Card className="w-full bg-white border rounded-xl text-gray-800 space-y-2">
-                    {/* <div className="flex justify-between">
-                      <div className="text-gray-400 text-xs">You are in Premium Plan</div>
-                    </div>
-                    <a
-                      className="font-bold hover:text-yellow-800 hover:underline"
-                    >
-                      200 PHP/Month
-                    </a> */}
-                    <CardHeader className="flex justify-between">
-                      <span className="text-gray-400 text-xs">
-                        You are in Premium Plan
-                      </span>
-                      <CardTitle>200 PHP/Monthly</CardTitle>
-                    </CardHeader>
-                    <CardFooter>
-                      <Button className="w-full">Change Plan</Button>
-                    </CardFooter>
-                  </Card>
-                </div>
-              </div>
-
-              <div>
-                <h2 className="text-2xl text-left font-bold mb-4">
-                  Payment Method
-                </h2>
-                <div className="space-y-4">
-                  <Card className="w-full bg-white border rounded-xl text-gray-800 space-y-2">
-                    <CardHeader className="flex justify-between">
-                      <span className="text-gray-400 text-xs">
-                        Your next payment: 04/01/2024
-                      </span>
-                      <CardTitle>Credit Card</CardTitle>
-                    </CardHeader>
-                    <CardFooter>
-                      <Button className="w-full">Cancel</Button>
-                    </CardFooter>
-                  </Card>
-                </div>
-              </div>
             </div>
           </div>
         </div>
