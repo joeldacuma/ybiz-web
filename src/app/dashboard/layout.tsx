@@ -10,7 +10,7 @@ import { getDashboardContent,
          getFooter } from "@/providers";
 import { Loader } from "@/components/Loader";
 import DialogMessageModal from "@/components/DialogMessageModal";
-import { ROUTE_USER_SURVEY, USER_PROFILE_ID } from "@/constants";
+import { ROUTE_USER_SURVEY, USER_PROFILE_ID, AXIOS_ERROR_VALIDATION } from "@/constants";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { getItem, setItem } from "@/lib/utils";
@@ -21,7 +21,7 @@ const MainLayout = ({children}: any) => {
   const [openMenu, setOpenMenu] = useState('absolute');
   const [isUserProfile, setIsUserProfile] = useState(false);
   const [verticalScroll, setVerticalScroll] = useState(0);
-  const _userId = getItem(USER_PROFILE_ID);
+  const [userId, setUserId] = useState<any>(getItem(USER_PROFILE_ID));
   const { data: dashboardContent, isLoading: isLoadingDashboard } = useQuery({
     queryKey: ["dashboard"],
     queryFn: () => getDashboardContent()
@@ -34,9 +34,9 @@ const MainLayout = ({children}: any) => {
     queryKey: ["footers"],
     queryFn: () => getFooter()
   });
-  const {data:userSurveyInfo, isLoading:isLoadinguserSurveyInfo} = useQuery({
+  const {data:userSurveyInfo, isLoading:isLoadinguserSurveyInfo} = useQuery<any>({
     queryKey: ["userSurveyInfo"],
-    queryFn: () => getMembersContentDetails(_userId)
+    queryFn: () => getMembersContentDetails(userId)
   });
   const [contentInfo, setContentInfo] = useState<any>({
     userContent: null,
@@ -50,18 +50,20 @@ const MainLayout = ({children}: any) => {
   };
 
   useEffect(() => {
-    if (isLoaded && !_userId) {
+    if (!userId) {
       setItem(USER_PROFILE_ID, user?.id);
+      setUserId(user?.id);
     }
 
-    if (userSurveyInfo?.error || !userSurveyInfo) {
+    if (userSurveyInfo?.error?.name === AXIOS_ERROR_VALIDATION) {
       setIsUserProfile(true);
+    } else {
+      setIsUserProfile(false);
     }
 
     setContentInfo({
       userContent: userContentSurvey,
-      surveyInfo: userSurveyInfo
-    
+      surveyInfo: userSurveyInfo  
     });
 
     window.addEventListener('scroll', handleSrollVertical);
@@ -72,7 +74,7 @@ const MainLayout = ({children}: any) => {
       window.removeEventListener('scroll', handleSrollVertical);
     };
 
-  }, [verticalScroll, user, isLoaded, userSurveyInfo, userContentSurvey]);
+  }, [verticalScroll, user, userId, isLoaded, userSurveyInfo?.error, userContentSurvey]);
 
   const handleSetOpenMenu = () => {
     setOpenMenu(openMenu === 'hidden' ? 
