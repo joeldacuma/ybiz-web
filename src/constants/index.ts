@@ -12,6 +12,7 @@ export const VERIFICATION_CODE_PENDING = "It may take a minute to receive your c
 export const RESEND_VERIFICATION_CODE_TEXT = "Haven't received the verification yet?";
 export const RESEND_VERIFICATION_CODE = "Resend code";
 export const ERROR_LOGIN_VERIFICATION_MESSAGE = "Invalid verification code.";
+export const NO_DESCRIPTION_MESSAGE = "No description available.";
 
 // VALIDATION
 export const USER_PROFILE_ID = "ybiz_user_id";

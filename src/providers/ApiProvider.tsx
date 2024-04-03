@@ -152,3 +152,13 @@ export const createMembersContentDetails = async (body: MembersProps) => {
     return { error: error };
   }
 };
+
+export const getIndustries = async () => {
+  try {
+    const response = await AxiosInstanceProvider.get("/industries?populate=deep&pagination[page]=1");
+    return { categories: response.data };
+  } 
+  catch (error) {
+    return { error: error };
+  }
+};

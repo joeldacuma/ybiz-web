@@ -7,7 +7,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getDashboardContent, 
          getUserSurveyContent, 
          getMembersContentDetails,
-         getFooter } from "@/providers";
+         getFooter,
+         getIndustries } from "@/providers";
 import { Loader } from "@/components/Loader";
 import DialogMessageModal from "@/components/DialogMessageModal";
 import { ROUTE_USER_SURVEY, USER_PROFILE_ID, AXIOS_ERROR_VALIDATION } from "@/constants";
@@ -36,11 +37,16 @@ const MainLayout = ({children}: any) => {
   });
   const {data:userSurveyInfo, isLoading:isLoadinguserSurveyInfo} = useQuery<any>({
     queryKey: ["userSurveyInfo"],
-    queryFn: () => getMembersContentDetails(userId)
+    queryFn: async () => await getMembersContentDetails(userId)
+  });
+  const {data:industries, isLoading: isLoadingIndustries} = useQuery({
+    queryKey: ["industries"],
+    queryFn: () => getIndustries()
   });
   const [contentInfo, setContentInfo] = useState<any>({
     userContent: null,
-    surveyInfo: null
+    surveyInfo: null,
+    ...industries
   });
 
   const router = useRouter();
@@ -63,7 +69,8 @@ const MainLayout = ({children}: any) => {
 
     setContentInfo({
       userContent: userContentSurvey,
-      surveyInfo: userSurveyInfo  
+      surveyInfo: userSurveyInfo,
+      industries: industries
     });
 
     window.addEventListener('scroll', handleSrollVertical);
@@ -74,7 +81,7 @@ const MainLayout = ({children}: any) => {
       window.removeEventListener('scroll', handleSrollVertical);
     };
 
-  }, [verticalScroll, user, userId, isLoaded, userSurveyInfo?.error, userContentSurvey]);
+  }, [verticalScroll, user, userId, isLoaded, userSurveyInfo?.error, userContentSurvey, industries]);
 
   const handleSetOpenMenu = () => {
     setOpenMenu(openMenu === 'hidden' ? 
@@ -93,7 +100,8 @@ const MainLayout = ({children}: any) => {
   if (isLoadingDashboard || 
       isLoadingFooter ||
       isUserContentSurvey||
-      isLoadinguserSurveyInfo) { 
+      isLoadinguserSurveyInfo ||
+      isLoadingIndustries) { 
     return <Loader />;
   }
 
