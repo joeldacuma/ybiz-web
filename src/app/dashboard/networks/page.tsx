@@ -6,6 +6,7 @@ import { DataContext } from "@/providers/ContextProvider";
 import { Button } from "@/components/ui/button";
 import { GlobeIcon } from "@radix-ui/react-icons";
 import { NO_DESCRIPTION_MESSAGE } from "@/constants";
+import Paginator from "@/components/Paginator";
 
 const Networks = () => {
   const data: any = useContext(DataContext);
@@ -48,7 +49,10 @@ const Networks = () => {
   }, [industries]);
 
   return (
-    <div className="flex justify-center px-12 py-6">
+    <div className="flex flex-col justify-center px-12 py-6">
+     <div className="py-4">
+        <Paginator />
+      </div>
       <ScrollArea className="h-[84vh] hidden lg:block w-[60vw] rounded">
         {industrySection}
       </ScrollArea>
