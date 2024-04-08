@@ -11,7 +11,7 @@ import {
 
 const Paginator = () => {
   return (
-    <Pagination>
+    <Pagination className="justify-end">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious href="#" />

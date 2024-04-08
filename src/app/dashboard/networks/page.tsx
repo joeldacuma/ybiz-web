@@ -16,6 +16,8 @@ const Networks = () => {
     industries?.categories?.data
     .sort((a: any, b: any) =>  a.uid > b.uid ? 1 : -1);
 
+    console.log(industries);
+
     return (
       <>
         {industries?.categories?.data.length > 0 && 
@@ -50,10 +52,10 @@ const Networks = () => {
 
   return (
     <div className="flex flex-col justify-center px-12 py-6">
-     <div className="py-4">
+      <div className="py-4 w-4/5">
         <Paginator />
       </div>
-      <ScrollArea className="h-[84vh] hidden lg:block w-[60vw] rounded">
+      <ScrollArea className="h-[84vh] hidden lg:block w-4/5 rounded">
         {industrySection}
       </ScrollArea>
       <div className="block lg:hidden">
