@@ -37,7 +37,7 @@ const MainLayout = ({children}: any) => {
   });
   const {data:userSurveyInfo, isLoading:isLoadinguserSurveyInfo} = useQuery<any>({
     queryKey: ["userSurveyInfo"],
-    queryFn: async () => await getMembersContentDetails(userId)
+    queryFn: () => getMembersContentDetails(userId)
   });
   const {data:industries, isLoading: isLoadingIndustries} = useQuery({
     queryKey: ["industries"],
